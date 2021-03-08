@@ -5,12 +5,14 @@ export const PasswordRecovery = () => {
 	return (
 		<div className={s.passRecOverlay}>
 			PasswordRecovery
-			PasswordRecovery
-			PasswordRecovery
-			PasswordRecovery
-			PasswordRecovery
-			PasswordRecovery
-			PasswordRecovery
+			devBaranov
+			devBaranov
+			devBaranov
+			devBaranov
+			devBaranov
+			devBaranov
+			devBaranov
+			devBaranov
 		</div>
 	)
 }
