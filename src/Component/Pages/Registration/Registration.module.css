@@ -4,12 +4,10 @@
     flex-direction: column;
     margin: 100px auto 0;
     align-items: center;
-    border: 1px solid red;
+    border: 1px dotted red;
     padding: 100px;
 }
 .registrationOverlay form {
     display: flex;
-    width: 200%;
-    color: red;
     flex-direction: column;
 }
