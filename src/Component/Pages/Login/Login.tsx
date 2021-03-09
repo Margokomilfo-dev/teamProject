@@ -3,12 +3,15 @@ import s from './Login.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
 import {Checkbox, FormControl, FormControlLabel, FormGroup, TextField, Button, Grid} from '@material-ui/core'
+import {loginTC} from "../../../redux/loginReducer";
+import {AppRootStateType} from "../../../redux/store";
+import { Redirect } from 'react-router-dom';
 
 
 export type AuthLoginType = {
 	email: string
 	password: string
-	rememberMe: false
+	rememberMe: true
 }
 
 export const Login = () => {
@@ -19,13 +22,13 @@ export const Login = () => {
 		rememberMe?: boolean
 	}
 
-	// const dispatch = useDispatch();
+	const dispatch = useDispatch();
 
 	const formik = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
-			rememberMe: false
+			email: 'kostousik@mail.ru',
+			password: 'UluWatu27092014',
+			rememberMe: true
 		},
 		validate: (values: AuthLoginType) => {
 			const errors: FormikErrorType = {};
@@ -41,10 +44,16 @@ export const Login = () => {
 			return errors;
 		},
 		onSubmit: values => {
-			alert(JSON.stringify(values))
+			dispatch(loginTC({email:values.email, password:values.password, rememberMe: values.rememberMe}))
+			formik.resetForm();
 		},
 	})
 
+	const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+
+	if(isLoggedIn) {
+		return <Redirect to={'/'}/>
+	}
 
 	return <Grid container justify="center">
 		<Grid item xs={4}>
