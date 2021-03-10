@@ -6,10 +6,10 @@ const instance = axios.create({
     baseURL: 'http://localhost:7542/2.0/',  //local
     withCredentials: true,
     headers: {
-        'API-KEY': '4ecc4fdb-da6b-45f9-bb99-93bccea55cd4', //Margo
+        'API-KEY': 'bb865843-5d18-4250-b5ca-e680c11343f1', //Margo
         //НАПИШИТЕ ЗДЕСЬ СВОЙ и пользуйтесь именно своим ключиком! =)
         // 'API-KEY':     //Alex
-        'API-KEY2':     'bb865843-5d18-4250-b5ca-e680c11343f1'
+        // 'API-KEY2':     'bb865843-5d18-4250-b5ca-e680c11343f1'
     }
 })
 
