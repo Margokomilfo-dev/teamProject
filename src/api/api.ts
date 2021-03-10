@@ -14,16 +14,16 @@ const instance = axios.create({
 })
 
 export const API = {
-    registration: (data: RegistrationPostDataType) => {
-        return instance.post<RegistrationPostResponseType>('/auth/register', {data}).then(response => {
+    registration: (email: string, password: string) => {
+        return instance.post<RegistrationPostResponseType>('/auth/register',{email, password}).then(response => {
             return response.data
         })
     },
     authMe: () => {
 
     },
-    login: (data: AuthLoginType) => {
-        return instance.post<LoginResponseType>('auth/login' , {data}).then(response => {
+    login: ( email: string, password: string, rememberMe: boolean = true) => {
+        return instance.post<LoginResponseType>('auth/login' , {email, password,rememberMe}).then(response => {
             return response.data
         })
     },

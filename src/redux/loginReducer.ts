@@ -29,7 +29,7 @@ export const setIsErrorAC = (error: string) => ({type: ACTIONS_TYPE.SET_IS_ERROR
 
 //thunks
 export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch<ActionsType>) => {
-    API.login(data).then(res => {
+    API.login(data.email, data.password, data.rememberMe).then(res => {
         if (!res.error) {
             dispatch(setIsLoggedInAC(true));
         } else {
