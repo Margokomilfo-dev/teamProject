@@ -35,7 +35,7 @@ export const setError = (error: string) => ({type: ACTIONS_TYPE.SET_ERROR, error
 
 // thunks
 export const setRegistration = (data: RegistrationPostDataType) => (dispatch: Dispatch) => {
-    API.registration(data).then(res => {
+    API.registration(data.email, data.password).then(res => {
         if (!res.error) {
             dispatch(setIsRegistered(true));
         } else {

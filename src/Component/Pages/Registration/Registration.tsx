@@ -28,8 +28,8 @@ export const Registration = () => {
 	const formik = useFormik({
 		initialValues: {
 			email: 'margokomilfo@mail.ru',
-			password1: '1234567',
-			password2: '1234567',
+			password1: '12345678',
+			password2: '12345678',
 		}as FormikDataType,
 		validate,
 		onSubmit: values => {
