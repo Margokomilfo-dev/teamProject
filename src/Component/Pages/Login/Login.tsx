@@ -26,8 +26,8 @@ export const Login = () => {
 
 	const formik = useFormik({
 		initialValues: {
-			email: 'kostousik@mail.ru',
-			password: 'UluWatu27092014',
+			email: 'margokomilfo@mail.ru',
+			password: '12345678',
 			rememberMe: true
 		},
 		validate: (values: AuthLoginType) => {
@@ -51,9 +51,9 @@ export const Login = () => {
 
 	const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
-	if(isLoggedIn) {
-		return <Redirect to={'/'}/>
-	}
+	// if(isLoggedIn) {
+	// 	return <Redirect to={'/'}/>
+	// }
 
 	return <Grid container justify="center">
 		<Grid item xs={4}>
