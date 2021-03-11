@@ -1,8 +1,9 @@
 import axios from 'axios';
+import {resolveAny} from "dns";
 
 
 const instance = axios.create({
-    // baseURL: 'https://neko-back.herokuapp.com/2.0', //heroku
+    // baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
     baseURL: 'http://localhost:7542/2.0/',  //local
     withCredentials: true,
     headers: {
@@ -30,6 +31,14 @@ export const API = {
     logOut: () => {
         return instance.delete<LogOutResponseType>(`auth/login`);
     },
+    //for passRecovery
+    passRec: (email: string, from: string, message: string ) => {
+        return instance.post<PassRecResponseType>('auth/forgot',{ email, from, message }).then(response => {
+            debugger
+            return response.data
+        })
+    }
+
 };
 
 export default API;
@@ -63,3 +72,16 @@ export type AuthLoginType = {
 
 export type RegistrationPostDataType = { email: string, password: string }
 export type RegistrationPostResponseType = {addedUser: any, error?: string}
+
+//for PasswordRec
+export type PassRecType = {
+    email: string
+    from: string
+    message: string
+}
+export type PassRecResponseType = {
+    answer: boolean
+    html: boolean
+    info: string
+    success: boolean
+}
