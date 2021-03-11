@@ -9,7 +9,7 @@ import {Form, Input, Button} from 'antd'
 
 export const Registration = () => {
     const dispatch = useDispatch()
-    // const isRegistered = useSelector<AppRootStateType, boolean>(state => state.auth.isRegistered)
+    const isRegistered = useSelector<AppRootStateType, boolean>(state => state.auth.isRegistered)
     const layout = {
         labelCol: {span: 8},
         wrapperCol: {span: 16},
@@ -22,10 +22,10 @@ export const Registration = () => {
         console.log('Failed:', errorInfo)
     }
 
-    //
-    // if (isRegistered) {
-    //     return <Redirect to={'/login'}/>
-    // }
+
+    if (isRegistered) {
+        return <Redirect to={'/login'}/>
+    }
 
     return (
         <div className={s.registrationOverlay}>
