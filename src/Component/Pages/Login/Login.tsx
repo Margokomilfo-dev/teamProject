@@ -17,9 +17,9 @@ export type AuthLoginType = {
 export const Login = () => {
 
 	type FormikErrorType = {
-		email?: string
-		password?: string
-		rememberMe?: boolean
+		email?: string,
+		password?: string,
+		rememberMe?: boolean,
 	}
 
 	const dispatch = useDispatch();
