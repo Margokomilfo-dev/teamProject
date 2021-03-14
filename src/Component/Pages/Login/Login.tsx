@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import s from './Login.module.css'
 import {useDispatch, useSelector} from "react-redux";
 import {useFormik} from "formik";
@@ -6,6 +6,8 @@ import {Checkbox, FormControl, FormControlLabel, FormGroup, TextField, Button, G
 import {loginTC} from "../../../redux/loginReducer";
 import {AppRootStateType} from "../../../redux/store";
 import { Redirect } from 'react-router-dom';
+import { initializeAppTC } from '../../../redux/appReducer';
+import {setProfileAC} from '../../../redux/profileReducer'
 
 
 export type AuthLoginType = {
@@ -13,21 +15,21 @@ export type AuthLoginType = {
 	password: string
 	rememberMe: true
 }
+type FormikErrorType = {
+	email?: string,
+	password?: string,
+	rememberMe?: boolean,
+}
 
 export const Login = () => {
+	const dispatch = useDispatch()
+	const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
 
-	type FormikErrorType = {
-		email?: string,
-		password?: string,
-		rememberMe?: boolean,
-	}
-
-	const dispatch = useDispatch();
 
 	const formik = useFormik({
 		initialValues: {
-			email: 'margokomilfo@mail.ru',
-			password: '12345678',
+			email: 'nya-admin@nya.nya',
+			password: '1qazxcvBG',
 			rememberMe: true
 		},
 		validate: (values: AuthLoginType) => {
@@ -45,21 +47,24 @@ export const Login = () => {
 		},
 		onSubmit: values => {
 			dispatch(loginTC({email:values.email, password:values.password, rememberMe: values.rememberMe}))
+			dispatch(initializeAppTC())
 			formik.resetForm();
 		},
 	})
 
-	const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
-
-	// if(isLoggedIn) {
-	// 	return <Redirect to={'/'}/>
-	// }
+	if(isLoggedIn) {
+		return <Redirect to={'/profile'}/>
+	}
 
 	return <Grid container justify="center">
 		<Grid item xs={4}>
 			<form onSubmit={formik.handleSubmit}>
 				<FormControl>
 					<FormGroup>
+						<p>To log in use common test account credentials:</p>
+						<p><span>Email: </span> nya-admin@nya.nya</p>
+						<p><span>Password: </span> 1qazxcvBG</p>
+
 						<TextField
 							label="Email"
 							margin="normal"

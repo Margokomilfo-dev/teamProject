@@ -35,13 +35,14 @@ export const setError = (error: string) => ({type: ACTIONS_TYPE.SET_ERROR, error
 
 // thunks
 export const setRegistration = (data: RegistrationPostDataType) => (dispatch: Dispatch) => {
-    API.registration(data.email, data.password).then(res => {
-        if (!res.error) {
-            dispatch(setIsRegistered(true));
-        } else {
-            dispatch(setError(res.error))
-        }
-    })
+    API.registration(data.email, data.password)
+        .then(res => {
+            dispatch(setIsRegistered(true))})
+        .catch(err => {
+            // dispatch(setError(err.message))
+            dispatch(setError('Email already exists'))
+        })
+
 }
 
 // types

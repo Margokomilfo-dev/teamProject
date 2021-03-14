@@ -4,12 +4,14 @@ import {appReducer} from './appReducer'
 import { authReducer } from './authReducer'
 import {loginReducer} from "./loginReducer";
 import {forgotReducer} from "./forgotReducer";
+import { profileReducer } from './profileReducer';
 
 
 const rootReducer = combineReducers({
     auth: authReducer,
     app: appReducer,
     login: loginReducer,
+    profile: profileReducer,
     passRec: forgotReducer
 })
 

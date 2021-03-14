@@ -1,5 +1,5 @@
-import axios from 'axios';
-import {resolveAny} from "dns";
+import axios from 'axios'
+import {resolveAny} from 'dns'
 
 
 const instance = axios.create({
@@ -11,32 +11,33 @@ const instance = axios.create({
 
 export const API = {
     registration: (email: string, password: string) => {
-        return instance.post<RegistrationPostResponseType>('/auth/register',{email, password}).then(response => {
+        return instance.post<RegistrationPostResponseType>('/auth/register', {email, password}).then(response => {
             return response.data
         })
     },
     authMe: () => {
-
+        return instance.get('auth/me').then(res => {
+            return res.data
+        })
     },
-    login: ( email: string, password: string, rememberMe: boolean = true) => {
-        return instance.post<LoginResponseType>('auth/login' , {email, password,rememberMe}).then(response => {
+    login: (email: string | null, password: string | null, rememberMe: boolean = true) => {
+        return instance.post<LoginResponseType>('auth/login', {email, password, rememberMe}).then(response => {
             return response.data
         })
     },
     logOut: () => {
-        return instance.delete<LogOutResponseType>(`auth/login`);
+        return instance.delete<LogOutResponseType>(`auth/me`)
     },
     //for passRecovery
-    passRec: (email: string, from: string, message: string ) => {
-        return instance.post<PassRecResponseType>('auth/forgot',{ email, from, message }).then(response => {
-            debugger
+    passRec: (email: string, from: string, message: string) => {
+        return instance.post<PassRecResponseType>('auth/forgot', {email, from, message}).then(response => {
             return response.data
         })
     }
 
-};
+}
 
-export default API;
+export default API
 
 
 //types
@@ -45,18 +46,20 @@ export type LogOutResponseType = {
     error: string
 }
 
-export type LoginResponseType  = {
-    _id: string
+export type LoginResponseType = {
+    avatar: string
+    created: string
     email: string
-    name: string
-    avatar?: string
-    publicCardPacksCount: number;
-    created: Date
-    updated: Date
     isAdmin: boolean
-    verified: boolean
+    name: string
+    publicCardPacksCount: number
     rememberMe: boolean
-    error?: string
+    token: string
+    tokenDeathTime: number
+    updated: string
+    verified: boolean
+    __v: number
+    _id: string
 }
 
 export type AuthLoginType = {
@@ -66,7 +69,7 @@ export type AuthLoginType = {
 }
 
 export type RegistrationPostDataType = { email: string, password: string }
-export type RegistrationPostResponseType = {addedUser: any, error?: string}
+export type RegistrationPostResponseType = { addedUser: any, error?: string }
 
 //for PasswordRec
 export type PassRecType = {
