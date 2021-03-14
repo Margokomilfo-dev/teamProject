@@ -3,8 +3,8 @@ import {resolveAny} from 'dns'
 
 
 const instance = axios.create({
-    // baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
-    baseURL: 'http://localhost:7542/2.0/',  //local
+    baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
+    // baseURL: 'http://localhost:7542/2.0/',  //local
     withCredentials: true,
     headers: {}
 })
