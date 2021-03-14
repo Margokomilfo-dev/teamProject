@@ -1,6 +1,4 @@
 import axios from 'axios'
-import {resolveAny} from 'dns'
-
 
 const instance = axios.create({
     baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
