@@ -6,8 +6,25 @@
     align-items: center;
     border: 1px dotted red;
     padding: 100px;
+
 }
 .registrationOverlay form {
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+.registrationOverlay form input {
+    width: 330px;
+}
+
+.serverError{
+    position: absolute;
+    color: red;
+    margin: 10px auto;
+    bottom: -40px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    left: calc(50% - 100px);
 }

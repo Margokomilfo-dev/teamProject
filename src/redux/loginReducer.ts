@@ -1,5 +1,6 @@
-import API, {AuthLoginType} from "../api/api"
+import API, {AuthLoginType} from '../api/api'
 import {Dispatch} from 'redux'
+import {setProfileAC} from './profileReducer'
 
 export enum ACTIONS_TYPE {
     SET_IS_LOGIN = 'loginReducer/SET-IS-LOGGED-IN',
@@ -8,7 +9,7 @@ export enum ACTIONS_TYPE {
 
 const initialState = {
     isLoggedIn: false,
-    error: ''
+    error: '',
 }
 type InitialStateType = typeof initialState
 
@@ -28,14 +29,41 @@ export const setIsLoggedInAC = (value: boolean) => ({type: ACTIONS_TYPE.SET_IS_L
 export const setIsErrorAC = (error: string) => ({type: ACTIONS_TYPE.SET_IS_ERROR, error} as const)
 
 //thunks
-export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch<ActionsType>) => {
-    API.login(data.email, data.password, data.rememberMe).then(res => {
-        if (!res.error) {
-            dispatch(setIsLoggedInAC(true));
-        } else {
-            dispatch(setIsErrorAC(res.error))
-        }
-    })
+export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch) => {
+    API.login(data.email, data.password, data.rememberMe)
+        .then(res => {
+            dispatch(setIsLoggedInAC(true))
+            dispatch(setProfileAC(res))
+        })
+        .catch(err => {
+            dispatch(setIsErrorAC(err.error))
+        })
 }
+export const logOutTC = () => (dispatch: Dispatch) => {
+    API.logOut()
+        .then(res => {
+            dispatch(setIsLoggedInAC(false))
+        })
+        .catch(err => {
+            dispatch(setIsErrorAC(err.error))
+        })
+}
+
+//types
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setIsErrorAC>
 
+export type ProfileType = {
+    avatar: string
+    created: string
+    email: string
+    isAdmin: boolean
+    name: string
+    publicCardPacksCount: number
+    rememberMe: boolean
+    token: string
+    tokenDeathTime: number
+    updated: string
+    verified: boolean
+    __v: number
+    _id: string
+}
