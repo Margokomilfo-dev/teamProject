@@ -6,12 +6,7 @@ const instance = axios.create({
     // baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
     baseURL: 'http://localhost:7542/2.0/',  //local
     withCredentials: true,
-    headers: {
-        'API-KEY': 'bb865843-5d18-4250-b5ca-e680c11343f1', //Margo
-        //НАПИШИТЕ ЗДЕСЬ СВОЙ и пользуйтесь именно своим ключиком! =)
-        // 'API-KEY':     //Alex
-        // 'API-KEY2':     'bb865843-5d18-4250-b5ca-e680c11343f1'
-    }
+    headers: {}
 })
 
 export const API = {

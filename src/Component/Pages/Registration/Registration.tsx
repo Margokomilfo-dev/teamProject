@@ -9,7 +9,7 @@ import {Form, Input, Button} from 'antd'
 
 export const Registration = () => {
     const dispatch = useDispatch()
-    // const isRegistered = useSelector<AppRootStateType, boolean>(state => state.auth.isRegistered)
+    const isRegistered = useSelector<AppRootStateType, boolean>(state => state.auth.isRegistered)
     const layout = {
         labelCol: {span: 8},
         wrapperCol: {span: 16},
@@ -22,46 +22,31 @@ export const Registration = () => {
         console.log('Failed:', errorInfo)
     }
 
-    //
-    // if (isRegistered) {
-    //     return <Redirect to={'/login'}/>
-    // }
+
+    if (isRegistered) {
+        return <Redirect to={'/login'}/>
+    }
 
     return (
         <div className={s.registrationOverlay}>
             <h1>Registration form</h1>
 
-            <Form  {...layout}
-                   name="basic"
-                   initialValues={{remember: true}}
-                   onFinish={onFinish}
+            <Form  {...layout} name="basic" initialValues={{remember: true}} onFinish={onFinish}
                    onFinishFailed={onFinishFailed}>
-                <Form.Item
-                    label="email"
-                    name="email"
+                <Form.Item label="email" name="email" initialValue={'margokomilfo@mail.ru'}
                     rules={[
                         {required: true, message: 'Please input your email!'},
                         {type: 'email', message: 'The input is not valid E-mail!',}
-                    ]}
-                    initialValue={'margokomilfo@mail.ru'}
-                >
+                    ]}>
                     <Input/>
                 </Form.Item>
 
-                <Form.Item
-                    label="Password1"
-                    name="password1"
-                    rules={[{required: true, message: 'Please input your password!'}]}
-                    initialValue={'12345678'}
-                >
+                <Form.Item label="Password1" name="password1" initialValue={'12345678'}
+                           rules={[{required: true, message: 'Please input your password!'}]}>
                     <Input.Password/>
                 </Form.Item>
 
-                <Form.Item
-                    label="Password2"
-                    name="password2"
-                    initialValue={'12345678'}
-                    hasFeedback
+                <Form.Item label="Password2" name="password2" initialValue={'12345678'} hasFeedback
                     rules={[
                         {
                             required: true,
@@ -75,8 +60,7 @@ export const Registration = () => {
                                 return Promise.reject(new Error('The two passwords that you entered do not match!'))
                             },
                         }),
-                    ]}
-                >
+                    ]}>
                     <Input.Password/>
                 </Form.Item>
 
