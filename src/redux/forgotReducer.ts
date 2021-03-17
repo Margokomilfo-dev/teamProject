@@ -1,4 +1,4 @@
-import API, {PassRecType} from '../api/api'
+import {PassRecType, API} from '../api/api'
 import {Dispatch} from 'redux'
 
 enum ACTION_TYPE {
