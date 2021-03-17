@@ -18,10 +18,10 @@ function Header() {
 					<NavLink to={ PATH.REGISTRATION } activeClassName = { s.activeLink }>Registration</NavLink>
 				</div>
 				<div className={ s.item }>
-					<NavLink to={ PATH.NEW_PASSWORD } activeClassName = { s.activeLink }>New password</NavLink>
+					<NavLink to={ PATH.PASSWORD_RECOVERY } activeClassName = { s.activeLink }>Password recovery</NavLink>
 				</div>
 				<div className={ s.item }>
-					<NavLink to={ PATH.PASSWORD_RECOVERY } activeClassName = { s.activeLink }>Password recovery</NavLink>
+					<NavLink to={ PATH.PACKS } activeClassName = { s.activeLink }>Packs</NavLink>
 				</div>
 			</div>
 		</div>

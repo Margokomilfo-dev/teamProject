@@ -30,6 +30,8 @@ export const Profile = () => {
 						email: {profile.email}<br/>
 						created: {profile.created}<br/>
 						admin: {profile.isAdmin ? 'yes' : 'no'}<br/>
+
+                        <a href="/packs"> Packs</a>
 					</div>
 					<div><button onClick={logout}>Log out</button></div>
 

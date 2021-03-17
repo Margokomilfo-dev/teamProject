@@ -7,7 +7,7 @@ import {loginTC} from "../../../redux/loginReducer";
 import {AppRootStateType} from "../../../redux/store";
 import { Redirect } from 'react-router-dom';
 import { initializeAppTC } from '../../../redux/appReducer';
-import {setProfileAC} from '../../../redux/profileReducer'
+
 
 
 export type AuthLoginType = {
