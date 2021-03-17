@@ -1,61 +1,58 @@
 import React from 'react'
-import {useFormik} from 'formik'
-import {Button, FormControl, FormGroup, Grid, TextField} from "@material-ui/core";
-import {passRecTC} from "../../../redux/forgotReducer";
-import {useDispatch} from "react-redux";
-
-type PassRecType = {
-	email: string
-	from: string
-	message: string
-}
+import {Form, Input, Button } from 'antd'
+import s from './PasswordRecovery.module.css'
+import {sendEmailPassRecTC, setErrorPassRec} from "../../../redux/forgotReducer"
+import {useDispatch, useSelector} from "react-redux"
+import {AppRootStateType} from "../../../redux/store"
 
 export const PasswordRecovery = () => {
 
-	type FormikErrosType = {
-		email?: string
-	}
 	const dispatch = useDispatch()
 
-	const formik = useFormik({
-		initialValues: {
-			email: '',
-			from: 'test-front-admin <baranov.sys@gmail.com>',
-			message: `<div style="background-color: lime;padding: 15px> password recovery link: 
-<a href='http://localhost:3000/teamProject#/new-pass/$token$'>link </a> </div>`
-		},
-		validate: (values: PassRecType) => {
-			const errors: FormikErrosType = {};
-			if (!values.email) {
-				errors.email = 'Обезательно для ввода';
-			} else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-				errors.email = 'Не корректный email';
-			}
-			return errors
-		},
-		onSubmit: values => {
-			dispatch(passRecTC ({email: values.email, from: values.from, message: values.message} ))
-			formik.resetForm()
-		}
-	})
+	const errorPassRec = useSelector<AppRootStateType, string>(state => state.passRec.error)
+	const infoPassRec = useSelector<AppRootStateType, string>(state => state.passRec.info)
+
+	const from = "THE BEST MY TEAM baranov.sys@gmail.com"
+	const message = `<div>
+											вы отправили запрос на восстановления пароля, для продожения перейдите по ссылке:
+											<a href="https://baranovaleksei.github.io/new-pass/$token$">link</a>
+											если это были на Вы - то ничего не делайте
+									</div>`
+
+
+	const onFinish = (values: any) => {
+		dispatch(sendEmailPassRecTC({ email: values.emailRecPass, message: message, from: from}))
+		setTimeout(() => {
+			dispatch(setErrorPassRec(''))
+		}, 5000)
+	}
 
 	return (
-		<Grid container justify="center" alignItems="stretch" style={{height: '100vh'}}>
-			<Grid container justify="center" alignItems="center" >
-				<form onSubmit={formik.handleSubmit}>
-					<FormControl>
-						<FormGroup>
-							<TextField
-								label='Email'
-								margin = 'normal'
-								{...formik.getFieldProps('email')}
-							/>
-							{ formik.touched.email && formik.errors.email ? <div style={{color: "red"}}>{formik.errors.email}</div> : null}
-							<Button type={'submit'} variant={'contained'} color={'primary'}>Send email</Button>
-						</FormGroup>
-					</FormControl>
-				</form>
-			</Grid>
-		</Grid>
+		<div className={s.passRecOverlay}>
+
+			<span className={s.nameRecPass}>{infoPassRec}</span>
+			<Form className={s.formRecPass}
+				name="recoveryPass"
+				initialValues={{ remember: true }}
+				onFinish={onFinish}>
+
+				<Form.Item
+					label="Email"
+					name="emailRecPass"
+					rules={[{ type: 'email', required: true, message: 'Please input your email' }]}
+				>
+					<Input />
+
+				</Form.Item>
+					<span className={s.nameRecPass}> {errorPassRec} </span>
+				<Form.Item>
+					<Button type="primary" htmlType="submit">
+						send message
+					</Button>
+				</Form.Item>
+
+			</Form>
+		</div>
 	)
+
 }

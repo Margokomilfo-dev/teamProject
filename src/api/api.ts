@@ -28,9 +28,12 @@ export const API = {
     },
     //for passRecovery
     passRec: (email: string, from: string, message: string) => {
-        return instance.post<PassRecResponseType>('auth/forgot', {email, from, message}).then(response => {
-            return response.data
-        })
+        return instance.post<PassRecResponseType>('auth/forgot', {email, from, message})
+          .then(response => { return response.data })
+    },
+    newPass: (password: string, token: string) => {
+        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, token})
+          .then(response => { return response.data })
     }
 
 }
@@ -80,4 +83,8 @@ export type PassRecResponseType = {
     html: boolean
     info: string
     success: boolean
+}
+export type NewPassResponseType = {
+    info: string
+    error: string
 }
