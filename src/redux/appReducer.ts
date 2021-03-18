@@ -31,7 +31,6 @@ export const change_statusAC = (value: boolean) => ({type: ACTIONS_TYPE.CHANGE_S
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     API.authMe()
         .then(res => {
-            debugger
             dispatch(isInitializedAC(true))
     })
 }
