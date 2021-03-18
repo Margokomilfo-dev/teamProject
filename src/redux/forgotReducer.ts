@@ -52,7 +52,6 @@ export const newPassTC = (password: string, resetPasswordToken: string) => (disp
 }
 
 type ActionType = ReturnType<typeof setOkPassRecAC>
-
   							| ReturnType<typeof setErrorPassRec>
 								| ReturnType<typeof setOkNewPassAC>
 								| ReturnType<typeof setErrorNewPass>

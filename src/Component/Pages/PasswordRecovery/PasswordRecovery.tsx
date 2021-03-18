@@ -15,7 +15,7 @@ export const PasswordRecovery = () => {
 	const from = "THE BEST MY TEAM baranov.sys@gmail.com"
 	const message = `<div>
 											вы отправили запрос на восстановления пароля, для продожения перейдите по ссылке:
-											<a href='https://baranovaleksei.github.io/teamProject/#/new-pass/$token$'>link</a>
+											<a href='http://baranovaleksei.github.io/teamProject/#/new-pass/$token$'>link</a>
 											если это были на Вы - то ничего не делайте
 									</div>`
 
