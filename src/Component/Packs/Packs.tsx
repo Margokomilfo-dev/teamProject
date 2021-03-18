@@ -4,11 +4,15 @@ import {AppRootStateType} from "../../redux/store";
 import s from './Packs.module.css'
 import {CardPackType, getCardPacksTC} from "../../redux/packReducer";
 import {Button} from "antd";
+import {PaginationComp} from '../Pagination/Pagination'
 
 export const Packs = () => {
     const dispatch = useDispatch()
+    const cardPacksTotalCount = useSelector<AppRootStateType, number >(state => state.pack.cardPacksTotalCount)
     const cardPacks = useSelector<AppRootStateType,  Array<CardPackType>>(state => state.pack.cardPacks)
-
+    const onChangePage = (pageNumber: number) => {
+        dispatch(getCardPacksTC(pageNumber))
+    }
 
     useEffect(() => {
         dispatch(getCardPacksTC())
@@ -29,6 +33,7 @@ export const Packs = () => {
                 <Button style={{marginLeft: "10px"}} type="primary" >update</Button>
             </ul>)}
 
+            <PaginationComp totalItemCount={cardPacksTotalCount} onChangePage={onChangePage}/>
         </div>
     )
 }
