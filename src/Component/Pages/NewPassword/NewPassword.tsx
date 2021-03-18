@@ -13,7 +13,7 @@ export const NewPassword = () => {
 	const infoNewPass = useSelector<AppRootStateType, string>(state => state.passRec.infoNewPass)
 	const history = useHistory()
 
-	const myToken = history.location.pathname.slice(10, history.location.pathname.length)
+	const resetPasswordToken = history.location.pathname.slice(10, history.location.pathname.length)
 
 	const layout = {
 		labelCol: {span: 8},
@@ -21,7 +21,7 @@ export const NewPassword = () => {
 	}
 
 	const onFinish = (values: any) => {
-		dispatch( newPassTC(values.newPassword1, myToken) );
+		dispatch( newPassTC(values.newPassword1, resetPasswordToken) );
 	}
 
 	const onFinishFailed = (errorInfo: any) => {

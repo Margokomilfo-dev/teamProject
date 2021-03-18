@@ -31,8 +31,8 @@ export const API = {
         return instance.post<PassRecResponseType>('auth/forgot', {email, from, message})
           .then(response => { return response.data })
     },
-    newPass: (password: string, token: string) => {
-        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, token})
+    newPass: (password: string, myToken: string) => {
+        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, myToken})
           .then(response => { return response.data })
     }
 
