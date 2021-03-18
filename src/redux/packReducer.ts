@@ -3,7 +3,9 @@ import {CARDAPI} from "../api/api";
 
 
 export enum ACTIONS_TYPE {
-    SET_CARD_PACKS = 'packsReducer/SET_CARD_PACKS'
+    SET_CARD_PACKS = 'packsReducer/SET_CARD_PACKS',
+    SET_PAGE_COUNT = 'packsReducer/SET_PAGE_COUNT',
+    SET_PACKS_TOTAL_COUNT = 'packsReducer/SET_PACKS_TOTAL_COUNT',
 }
 
 const initialState = {
@@ -22,7 +24,17 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
         case ACTIONS_TYPE.SET_CARD_PACKS:
             return {
                 ...state,
-                cardPacks: [...state.cardPacks, ...action.cards]
+                cardPacks: [...action.cards]
+            }
+        case ACTIONS_TYPE.SET_PAGE_COUNT:
+            return {
+                ...state,
+                pageCount: action.value
+            }
+        case ACTIONS_TYPE.SET_PACKS_TOTAL_COUNT:
+            return {
+                ...state,
+                cardPacksTotalCount: action.value
             }
         default:
             return state
@@ -31,18 +43,26 @@ export const packsReducer = (state: InitialStateType = initialState, action: Act
 
 // actions
 export const setCardPacksAC = (cards: Array<CardPackType>) => ({type: ACTIONS_TYPE.SET_CARD_PACKS, cards} as const)
+export const setCardPacksPageCountAC = (value: number) => ({type: ACTIONS_TYPE.SET_PAGE_COUNT, value} as const)
+export const setCardPacksTotalCountAC = (value: number) => ({type: ACTIONS_TYPE.SET_PACKS_TOTAL_COUNT, value} as const)
 
 //thunks
-export const getCardPacksTC = () => (dispatch: Dispatch) => {
-    CARDAPI.getCardPacks().then(res => {
-        dispatch(setCardPacksAC(res))
+export const getCardPacksTC = (pageNumber?: number) => (dispatch: Dispatch) => {
+    CARDAPI.getCardPacks(pageNumber).then(res => {
+        dispatch(setCardPacksAC(res.cardPacks))
+        dispatch(setCardPacksPageCountAC(res.pageCount))
+        dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount))
     })
 
 }
 
 
 //types
-export type ActionsType = ReturnType<typeof setCardPacksAC>
+export type ActionsType =
+    | ReturnType<typeof setCardPacksAC>
+    | ReturnType<typeof setCardPacksPageCountAC>
+    | ReturnType<typeof setCardPacksTotalCountAC>
+
 export type CardPackType = {
     "_id": string
     "user_id": string

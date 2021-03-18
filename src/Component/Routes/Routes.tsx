@@ -6,9 +6,6 @@ import {NewPassword} from "../Pages/NewPassword/NewPassword";
 import {PasswordRecovery} from "../Pages/PasswordRecovery/PasswordRecovery";
 import {Registration} from "../Pages/Registration/Registration";
 import {Profile} from "../Pages/Profile/Profile";
-import {useDispatch, useSelector} from 'react-redux'
-import {AppRootStateType} from '../../redux/store'
-import {initializeAppTC} from '../../redux/appReducer'
 import {Packs} from "../Packs/Packs";
 
 export const PATH = {

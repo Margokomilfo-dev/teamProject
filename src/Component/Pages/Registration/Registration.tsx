@@ -50,8 +50,9 @@ export const Registration = () => {
                                {required: true, message: 'Please input your password!'},
                                ({getFieldValue}) => ({
                                    validator(_, value) {
-                                       if (value.length < 8){return Promise.reject(new Error('8 and more symbols...'))} else
-                                       if (value.length > 8 || !value || getFieldValue('password1') === value) {
+                                       if (value.length < 8){return Promise.reject(new Error('8 and more' +
+                                           ' symbols...'))} else
+                                       if (value.length >= 8 || !value || getFieldValue('password1') === value) {
                                            return Promise.resolve()
                                        }
                                        return Promise.reject(new Error('Two passwords do not match!'))
@@ -69,7 +70,7 @@ export const Registration = () => {
                         ({getFieldValue}) => ({
                             validator(_, value) {
                                 if (value.length < 8){return Promise.reject(new Error('8 and more symbols...'))} else
-                                if (value.length > 8 || !value || getFieldValue('password1') === value) {
+                                if (value.length >= 8 || !value || getFieldValue('password1') === value) {
                                     return Promise.resolve()
                                 }
                                 return Promise.reject(new Error('Two passwords do not match!'))

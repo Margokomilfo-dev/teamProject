@@ -7,11 +7,9 @@ import {store} from './redux/store'
 import {BrowserRouter, HashRouter} from 'react-router-dom'
 
 ReactDOM.render(
-    <BrowserRouter>
         <Provider store={store}>
             <App/>
-        </Provider>
-    </BrowserRouter>,
+        </Provider>,
     document.getElementById('root')
 )
 
