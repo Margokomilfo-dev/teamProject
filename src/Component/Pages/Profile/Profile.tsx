@@ -3,7 +3,7 @@ import s from './Profile.module.css'
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from '../../../redux/store'
 import {initializeAppTC} from '../../../redux/appReducer'
-import {Redirect} from 'react-router-dom'
+import {NavLink, Redirect} from 'react-router-dom'
 import {ProfileType, setProfileAC} from '../../../redux/profileReducer'
 import {logOutTC} from '../../../redux/loginReducer'
 
@@ -35,7 +35,7 @@ export const Profile = () => {
 						created: {profile.created}<br/>
 						admin: {profile.isAdmin ? 'yes' : 'no'}<br/>
 
-                        <a href="/packs"> Packs</a>
+                        <NavLink to="/packs"> Packs</NavLink>
 					</div>
 					<div><button onClick={logout}>Log out</button></div>
 
