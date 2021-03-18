@@ -1,6 +1,5 @@
 import {Dispatch} from 'redux'
-import API from '../api/api'
-import {setIsLoggedInAC} from './loginReducer'
+import {API} from "../api/api";
 
 export enum ACTIONS_TYPE {
     SET_INITIALIZED_APP = 'appReducer/SET_INITIALIZED_APP',

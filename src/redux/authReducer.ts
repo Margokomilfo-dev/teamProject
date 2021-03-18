@@ -1,4 +1,4 @@
-import API, { RegistrationPostDataType } from "../api/api"
+import  { RegistrationPostDataType, API} from "../api/api"
 import {Dispatch} from 'redux'
 
 

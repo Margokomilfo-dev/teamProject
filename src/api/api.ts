@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {CardPackType} from "../redux/packReducer";
 
 const instance = axios.create({
     // baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
@@ -28,14 +29,20 @@ export const API = {
     },
     //for passRecovery
     passRec: (email: string, from: string, message: string) => {
-        return instance.post<PassRecResponseType>('auth/forgot', {email, from, message}).then(response => {
-            return response.data
-        })
+        return instance.post<PassRecResponseType>('auth/forgot', {email, from, message})
+          .then(response => { return response.data })
+    },
+    newPass: (password: string, token: string) => {
+        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, token})
+          .then(response => { return response.data })
     }
 
 }
-
-export default API
+export const CARDAPI = {
+    getCardPacks:() =>{
+        return instance.get<GetCardPacksResponseType>(`/cards/pack`).then(res =>  res.data.cardPacks)
+    },
+}
 
 
 //types
@@ -80,4 +87,30 @@ export type PassRecResponseType = {
     html: boolean
     info: string
     success: boolean
+}
+
+//types for Cards
+export type GetCardPacksResponseType = {
+    cardPacks: Array<CardPackType>
+    cardPacksTotalCount: number
+    maxCardsCount: number
+    minCardsCount: number
+    page: number
+    pageCount: number
+}
+
+export type AddPackType = {
+    name?: string
+    deckCover?: string
+    private?: boolean
+}
+
+export type UpdatePackType = {
+    _id: string
+    name?: string
+}
+=======
+export type NewPassResponseType = {
+    info: string
+    error: string
 }

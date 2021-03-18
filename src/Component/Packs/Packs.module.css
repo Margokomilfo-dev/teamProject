@@ -1,0 +1,41 @@
+.container {
+    margin: 0 auto;
+    max-width: 1300px;
+}
+
+.header {
+    margin: 150px 50px 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid grey;
+    background: lightsteelblue;
+}
+
+.cardPacksWrapper {
+    padding: 0;
+    margin: 10px 50px;
+    display: flex;
+    align-items: baseline;
+    list-style: none;
+    background: cadetblue;
+}
+
+li button:first-of-type {
+    display: none;
+}
+
+.card {
+    padding: 10px;
+    width: 370px;
+}
+
+.buttonsWrapper {
+    display: flex;
+}
+
+.packs {
+    display: flex;
+    justify-content: space-between;
+}
+

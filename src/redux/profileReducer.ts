@@ -1,11 +1,22 @@
-import API, {AuthLoginType} from '../api/api'
-import {Dispatch} from 'redux'
-import { ProfileType } from './loginReducer'
 
 export enum ACTIONS_TYPE {
     SET_PROFILE = 'loginReducer/SET_PROFILE',
 }
-
+export type ProfileType = {
+    avatar: string
+    created: string
+    email: string
+    isAdmin: boolean
+    name: string
+    publicCardPacksCount: number
+    rememberMe: boolean
+    token: string
+    tokenDeathTime: number
+    updated: string
+    verified: boolean
+    __v: number
+    _id: string
+}
 const initialState = {
     profile: null as null | ProfileType
 }
