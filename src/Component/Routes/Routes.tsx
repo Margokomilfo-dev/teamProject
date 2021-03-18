@@ -9,13 +9,15 @@ import {Profile} from "../Pages/Profile/Profile";
 import {useDispatch, useSelector} from 'react-redux'
 import {AppRootStateType} from '../../redux/store'
 import {initializeAppTC} from '../../redux/appReducer'
+import {Packs} from "../Packs/Packs";
 
 export const PATH = {
 	LOGIN: '/login',
 	REGISTRATION: '/registration',
 	PASSWORD_RECOVERY: '/pass-recovery',
 	NEW_PASSWORD: '/new-pass',
-	PROFILE: '/profile'
+	PROFILE: '/profile',
+	PACKS: '/packs'
 }
 
 function Routes() {
@@ -32,6 +34,7 @@ function Routes() {
 				<Route path={ PATH.PASSWORD_RECOVERY } render={ ()=> <PasswordRecovery/> } />
 				<Route path={ PATH.NEW_PASSWORD } render={ ()=> <NewPassword/> } />
 				<Route path={ PATH.PROFILE } render={ ()=> <Profile/> } />
+				<Route path={ PATH.PACKS } render={ ()=> <Packs/> } />
 
 				<Route path={'/404'} render={() => <Error404/>}/>
 				<Redirect from={'*'} to={'/404'}/>
