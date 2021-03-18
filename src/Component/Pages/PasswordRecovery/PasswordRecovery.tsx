@@ -54,5 +54,3 @@ export const PasswordRecovery = () => {
 			</Form>
 		</div>
 	)
-
-}

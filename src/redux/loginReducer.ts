@@ -1,6 +1,7 @@
-import API, {AuthLoginType} from '../api/api'
+import  {AuthLoginType, API} from '../api/api'
 import {Dispatch} from 'redux'
 import {setProfileAC} from './profileReducer'
+import {setIsLogin} from "./authReducer";
 
 export enum ACTIONS_TYPE {
     SET_IS_LOGIN = 'loginReducer/SET-IS-LOGGED-IN',
@@ -33,6 +34,7 @@ export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch) => {
     API.login(data.email, data.password, data.rememberMe)
         .then(res => {
             dispatch(setIsLoggedInAC(true))
+            dispatch(setIsLogin(true))
             dispatch(setProfileAC(res))
         })
         .catch(err => {
@@ -52,18 +54,4 @@ export const logOutTC = () => (dispatch: Dispatch) => {
 //types
 type ActionsType = ReturnType<typeof setIsLoggedInAC> | ReturnType<typeof setIsErrorAC>
 
-export type ProfileType = {
-    avatar: string
-    created: string
-    email: string
-    isAdmin: boolean
-    name: string
-    publicCardPacksCount: number
-    rememberMe: boolean
-    token: string
-    tokenDeathTime: number
-    updated: string
-    verified: boolean
-    __v: number
-    _id: string
-}
+

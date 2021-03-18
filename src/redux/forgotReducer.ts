@@ -1,4 +1,4 @@
-import API, {PassRecType} from '../api/api'
+import {PassRecType, API} from '../api/api'
 import {Dispatch} from 'redux'
 
 enum ACTION_TYPE {
@@ -52,6 +52,8 @@ export const newPassTC = (password: string, token: string) => (dispatch: Dispatc
 }
 
 type ActionType = ReturnType<typeof setOkPassRecAC>
-								| ReturnType<typeof setErrorPassRec>
+
+  							| ReturnType<typeof setErrorPassRec>
 								| ReturnType<typeof setOkNewPassAC>
 								| ReturnType<typeof setErrorNewPass>
+
