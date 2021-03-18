@@ -2,7 +2,7 @@ import  {AuthLoginType, API} from '../api/api'
 import {Dispatch} from 'redux'
 import {setProfileAC} from './profileReducer'
 import {setIsLogin} from "./authReducer";
-import {isInitializedAC} from './appReducer'
+import {initializeAppTC, isInitializedAC} from './appReducer'
 
 export enum ACTIONS_TYPE {
     SET_IS_LOGIN = 'loginReducer/SET-IS-LOGGED-IN',
@@ -38,6 +38,8 @@ export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch) => {
             dispatch(setIsLogin(true))
             dispatch(isInitializedAC(true))
             dispatch(setProfileAC(res))
+            initializeAppTC()
+
         })
         .catch(err => {
             dispatch(setIsErrorAC(err.error))
@@ -47,6 +49,8 @@ export const logOutTC = () => (dispatch: Dispatch) => {
     API.logOut()
         .then(res => {
             dispatch(setIsLoggedInAC(false))
+            dispatch(setIsLogin(false))
+            dispatch(isInitializedAC(false))
         })
         .catch(err => {
             dispatch(setIsErrorAC(err.error))

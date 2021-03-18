@@ -26,7 +26,9 @@ export const PasswordRecovery = () => {
 			dispatch(setErrorPassRec(''))
 		}, 5000)
 	}
-
+	const onFinishFailed = (errorInfo: any) => {
+		console.log('Failed:', errorInfo)
+	}
 	return (
 		<div className={s.passRecOverlay}>
 
@@ -34,7 +36,8 @@ export const PasswordRecovery = () => {
 			<Form className={s.formRecPass}
 				  name="recoveryPass"
 				  initialValues={{remember: true}}
-				  onFinish={onFinish}>
+				  onFinish={onFinish}
+				  onFinishFailed={onFinishFailed}>
 
 				<Form.Item
 					label="Email"
@@ -44,6 +47,9 @@ export const PasswordRecovery = () => {
 					<Input/>
 
 				</Form.Item>
+
+
+
 				<span className={s.nameRecPass}> {errorPassRec} </span>
 				<Form.Item>
 					<Button type="primary" htmlType="submit">
