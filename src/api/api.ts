@@ -15,7 +15,8 @@ export const API = {
         })
     },
     authMe: () => {
-        return instance.get('auth/me').then(res => {
+        return instance.post('auth/me', {}).then(res => {
+            debugger
             return res.data
         })
     },
@@ -33,14 +34,14 @@ export const API = {
           .then(response => { return response.data })
     },
     newPass: (password: string, token: string) => {
-        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, token})
+        return instance.post<NewPassResponseType> ('auth/set-new-password', {password, token})
           .then(response => { return response.data })
     }
 
 }
 export const CARDAPI = {
-    getCardPacks:() =>{
-        return instance.get<GetCardPacksResponseType>(`/cards/pack`).then(res =>  res.data.cardPacks)
+    getCardPacks:( pageNumber: number = 1, name: string = '') =>{
+        return instance.get<GetCardPacksResponseType>(`cards/pack?packName${name}&page=${pageNumber}`).then(res =>  res.data)
     },
 }
 
@@ -109,7 +110,7 @@ export type UpdatePackType = {
     _id: string
     name?: string
 }
-=======
+
 export type NewPassResponseType = {
     info: string
     error: string

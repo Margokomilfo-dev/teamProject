@@ -21,7 +21,7 @@ export const PasswordRecovery = () => {
 
 
 	const onFinish = (values: any) => {
-		dispatch(sendEmailPassRecTC({ email: values.emailRecPass, message: message, from: from}))
+		dispatch(sendEmailPassRecTC({email: values.emailRecPass, message: message, from: from}))
 		setTimeout(() => {
 			dispatch(setErrorPassRec(''))
 		}, 5000)
@@ -32,19 +32,19 @@ export const PasswordRecovery = () => {
 
 			<span className={s.nameRecPass}>{infoPassRec}</span>
 			<Form className={s.formRecPass}
-				name="recoveryPass"
-				initialValues={{ remember: true }}
-				onFinish={onFinish}>
+				  name="recoveryPass"
+				  initialValues={{remember: true}}
+				  onFinish={onFinish}>
 
 				<Form.Item
 					label="Email"
 					name="emailRecPass"
-					rules={[{ type: 'email', required: true, message: 'Please input your email' }]}
+					rules={[{type: 'email', required: true, message: 'Please input your email'}]}
 				>
-					<Input />
+					<Input/>
 
 				</Form.Item>
-					<span className={s.nameRecPass}> {errorPassRec} </span>
+				<span className={s.nameRecPass}> {errorPassRec} </span>
 				<Form.Item>
 					<Button type="primary" htmlType="submit">
 						send message
@@ -54,3 +54,4 @@ export const PasswordRecovery = () => {
 			</Form>
 		</div>
 	)
+}
