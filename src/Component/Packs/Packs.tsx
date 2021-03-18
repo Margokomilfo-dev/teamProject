@@ -4,45 +4,31 @@ import {AppRootStateType} from "../../redux/store";
 import s from './Packs.module.css'
 import {CardPackType, getCardPacksTC} from "../../redux/packReducer";
 import {Button} from "antd";
-import {PaginationComp} from '../Pagination/Pagination'
-import {Redirect} from 'react-router-dom'
 
 export const Packs = () => {
     const dispatch = useDispatch()
-    const cardPacksTotalCount = useSelector<AppRootStateType, number >(state => state.pack.cardPacksTotalCount)
     const cardPacks = useSelector<AppRootStateType,  Array<CardPackType>>(state => state.pack.cardPacks)
-    const isLogin = useSelector<AppRootStateType,  boolean>(state => state.auth.isLogin)
 
-    console.log(isLogin)
-    const onChangePage = (pageNumber: number) => {
-        dispatch(getCardPacksTC(pageNumber))
-    }
 
     useEffect(() => {
         dispatch(getCardPacksTC())
     }, [])
-
-    // if (!isLogin) {
-    //     return <Redirect to={'/login'}/>
-    // }
     return (
-        <div className={s.container}>
-            <div className={s.header}>
-                <p>Name</p>
-                <p style={{marginRight: "120px"}}>cardsCount</p>
-                <p>updated</p>
-                <p>Add</p>
-            </div>
-            {cardPacks.map((k, i) => <ul key={i} className={s.cardPacksWrapper}>
-            <li className={s.card}>{k.name}</li>
-            <li className={s.card}>{k.cardsCount}</li>
-            <li className={s.card}>{k.updated}</li>
-                <Button type="primary">delete</Button>
-                <Button style={{marginLeft: "10px"}} type="primary" >update</Button>
-            </ul>)}
+      <div className={s.container}>
+          <div className={s.header}>
+              <p>Name</p>
+              <p style={{marginRight: "120px"}}>cardsCount</p>
+              <p>updated</p>
+              <p>Add</p>
+          </div>
+          {cardPacks.map((k, i) => <ul key={i} className={s.cardPacksWrapper}>
+              <li className={s.card}>{k.name}</li>
+              <li className={s.card}>{k.cardsCount}</li>
+              <li className={s.card}>{k.updated}</li>
+              <Button type="primary">delete</Button>
+              <Button style={{marginLeft: "10px"}} type="primary" >update</Button>
+          </ul>)}
 
-            <PaginationComp totalItemCount={cardPacksTotalCount} onChangePage={onChangePage}/>
-        </div>
+      </div>
     )
 }
-
