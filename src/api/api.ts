@@ -16,6 +16,7 @@ export const API = {
     },
     authMe: () => {
         return instance.post('auth/me', {}).then(res => {
+            debugger
             return res.data
         })
     },

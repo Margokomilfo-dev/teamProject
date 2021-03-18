@@ -39,7 +39,6 @@ export const setRegistration = (data: RegistrationPostDataType) => (dispatch: Di
         .then(res => {
             dispatch(setIsRegistered(true))})
         .catch(err => {
-            // dispatch(setError(err.message))
             dispatch(setError('Email already exists'))
         })
 
