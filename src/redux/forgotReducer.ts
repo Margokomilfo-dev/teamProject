@@ -45,14 +45,13 @@ export const sendEmailPassRecTC = (data: PassRecType) => (dispatch: Dispatch<Act
 		.catch(error => { dispatch(setErrorPassRec('Such email is not registered'))})
 }
 
-export const newPassTC = (password: string, token: string) => (dispatch: Dispatch<ActionType>) => {
-	API.newPass(password, token)
+export const newPassTC = (password: string, resetPasswordToken: string) => (dispatch: Dispatch<ActionType>) => {
+	API.newPass(password, resetPasswordToken)
 		.then(res => {dispatch(setOkNewPassAC('password change'))})
 		.catch(err => {dispatch(setErrorNewPass('error new password'))})
 }
 
 type ActionType = ReturnType<typeof setOkPassRecAC>
-
   							| ReturnType<typeof setErrorPassRec>
 								| ReturnType<typeof setOkNewPassAC>
 								| ReturnType<typeof setErrorNewPass>

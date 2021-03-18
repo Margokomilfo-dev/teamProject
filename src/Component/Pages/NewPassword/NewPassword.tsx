@@ -1,7 +1,7 @@
 import React from 'react'
 import s from './NewPassword.module.css'
 import {Button, Form, Input} from "antd"
-import { newPassTC } from '../../../redux/forgotReducer'
+import {newPassTC, setErrorNewPass} from '../../../redux/forgotReducer'
 import {useDispatch, useSelector} from "react-redux"
 import { useHistory } from "react-router-dom"
 import {AppRootStateType} from "../../../redux/store";
@@ -11,9 +11,11 @@ export const NewPassword = () => {
 	const dispatch = useDispatch()
 	const error = useSelector<AppRootStateType, string>(state => state.passRec.errorNewPass)
 	const infoNewPass = useSelector<AppRootStateType, string>(state => state.passRec.infoNewPass)
+
 	const history = useHistory()
 
-	const myToken = history.location.pathname.slice(10, history.location.pathname.length)
+	const resetPasswordToken = history.location.pathname.slice(10, history.location.pathname.length)
+	// alert (resetPasswordToken)
 
 	const layout = {
 		labelCol: {span: 8},
@@ -21,7 +23,10 @@ export const NewPassword = () => {
 	}
 
 	const onFinish = (values: any) => {
-		dispatch( newPassTC(values.newPassword1, myToken) );
+		dispatch( newPassTC(values.newPassword1, resetPasswordToken) )
+		setTimeout(() => {
+			dispatch(setErrorNewPass(''))
+		}, 5000)
 	}
 
 	const onFinishFailed = (errorInfo: any) => {
