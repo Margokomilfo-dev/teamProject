@@ -2,8 +2,8 @@ import axios from 'axios'
 import {CardPackType} from "../redux/packReducer";
 
 const instance = axios.create({
-    // baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
-    baseURL: 'http://localhost:7542/2.0/',  //local
+    baseURL: 'https://neko-back.herokuapp.com/2.0/', //heroku
+    // baseURL: 'http://localhost:7542/2.0/',  //local
     withCredentials: true,
     headers: {}
 })
@@ -33,7 +33,7 @@ export const API = {
           .then(response => { return response.data })
     },
     newPass: (password: string, resetPasswordToken: string) => {
-        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, resetPasswordToken})
+        return instance.post<NewPassResponseType> ('auth/set-new-password', {password, resetPasswordToken})
           .then(response => { return response.data })
     }
 
