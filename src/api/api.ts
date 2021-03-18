@@ -33,7 +33,7 @@ export const API = {
           .then(response => { return response.data })
     },
     newPass: (password: string, resetPasswordToken: string) => {
-        return instance.post<NewPassResponseType> ('/auth/set-new-password', {password, resetPasswordToken})
+        return instance.post<NewPassResponseType> ('auth/set-new-password', {password, resetPasswordToken})
           .then(response => { return response.data })
     }
 
