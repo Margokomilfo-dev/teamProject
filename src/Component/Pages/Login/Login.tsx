@@ -28,9 +28,12 @@ export const Login = () => {
 
 	const formik = useFormik({
 		initialValues: {
-			email: 'nya-admin@nya.nya',
-			password: '1qazxcvBG',
+			// email: 'nya-admin@nya.nya',
+			// password: '1qazxcvBG',
+			email: 'baranov.sys@gmail.com',
+			password: '123456789',
 			rememberMe: true
+
 		},
 		validate: (values: AuthLoginType) => {
 			const errors: FormikErrorType = {};
