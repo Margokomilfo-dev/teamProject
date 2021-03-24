@@ -1,12 +1,13 @@
-import React, {useEffect} from 'react'
-import {Switch, Route, Redirect} from 'react-router-dom'
-import {Error404} from "../Pages/Error404/Error404";
-import {Login} from "../Pages/Login/Login";
-import {NewPassword} from "../Pages/NewPassword/NewPassword";
-import {PasswordRecovery} from "../Pages/PasswordRecovery/PasswordRecovery";
-import {Registration} from "../Pages/Registration/Registration";
-import {Profile} from "../Pages/Profile/Profile";
-import {Packs} from "../Packs/Packs";
+import React from 'react'
+import {Redirect, Route, Switch} from 'react-router-dom'
+import {Error404} from '../Pages/Error404/Error404'
+import {Login} from '../Pages/Login/Login'
+import {NewPassword} from '../Pages/NewPassword/NewPassword'
+import {PasswordRecovery} from '../Pages/PasswordRecovery/PasswordRecovery'
+import {Registration} from '../Pages/Registration/Registration'
+import {Profile} from '../Pages/Profile/Profile'
+import {Packs} from '../Packs/Packs'
+import { Cards } from '../Cards/Cards'
 
 export const PATH = {
 	LOGIN: '/login',
@@ -14,7 +15,8 @@ export const PATH = {
 	PASSWORD_RECOVERY: '/pass-recovery',
 	NEW_PASSWORD: '/new-pass',
 	PROFILE: '/profile',
-	PACKS: '/packs'
+	PACKS: '/packs',
+	CARDS: '/cards',
 }
 
 function Routes() {
@@ -32,6 +34,7 @@ function Routes() {
 				<Route path={ PATH.NEW_PASSWORD } render={ ()=> <NewPassword/> } />
 				<Route path={ PATH.PROFILE } render={ ()=> <Profile/> } />
 				<Route path={ PATH.PACKS } render={ ()=> <Packs/> } />
+				<Route path={ PATH.CARDS } render={ ()=> <Cards/> } />
 
 				<Route path={'/404'} render={() => <Error404/>}/>
 				<Redirect from={'*'} to={'/404'}/>
