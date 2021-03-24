@@ -36,13 +36,42 @@ export const API = {
         return instance.post<NewPassResponseType> ('auth/set-new-password', {password, resetPasswordToken})
           .then(response => { return response.data })
     }
-
 }
-export const CARDAPI = {
+//API for PACS
+export const APIpack = {
     getCardPacks:( pageNumber: number = 1, name: string = '', ) => {
-        return instance.get<GetCardPacksResponseType>(`cards/pack?packName${name}&page=${pageNumber}&pageCount=10 `).then(res => res.data)
+        return instance.get<GetCardPacksResponseType>(`cards/pack?packName${name}&page=${pageNumber}&pageCount=10 `)
+          .then(res => res.data)
     },
+    addPack: () => {
+        return instance.post<any>(`cards/pack`, {
+            cardsPack: {
+                name: 'new pack from the swords team',
+                deckCover: '',
+                private: false
+            }
+        })
+          .then(res => res.data)
+    },
+    deletePack: (id: string) => {
+        return instance.delete<any>(`cards/pack?id=${id}`)
+          .then(res => res.data)
+    },
+    updatePack: (idPack: string) => {
+        return instance.put<any>(`cards/pack`, {
+            cardsPack: {
+                _id: idPack,
+                name: 'new name',
+                deckCover: ""
+            }
+        })
+          .then(res => res.data)
+    }
 }
+//API for CARDS
+
+
+
 
 
 //types
