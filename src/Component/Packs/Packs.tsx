@@ -37,15 +37,9 @@ export const Packs = () => {
             {cardPacks.map((k, i) => <ul key={i} className={s.cardPacksWrapper}>
                 <li className={s.card}>{k.name}</li>
                 <li className={s.card}>{k.cardsCount}</li>
-
                 <li className={s.card}>{k.updated}</li>
-                <li className={s.card}>userId-{k.user_id}</li>
-                <li className={s.card}>packId-{k._id}</li>
-                <div>
-                    <Button type='default' style={{marginRight: "5px"}} shape={'circle'}  icon={<EditTwoTone />}/>
-                    <Button type="default" style={{marginRight: "5px"}} shape={'circle'} icon={<DeleteTwoTone/>} />
-                </div>
-
+                <Button type='default' style={{marginRight: "5px"}} shape={'circle'}  icon={<EditTwoTone />}/>
+                <Button type="default" style={{marginRight: "5px"}} shape={'circle'} icon={<DeleteTwoTone/>} />
             </ul>)}
 
             <PaginationComp totalItemCount={cardPacksTotalCount} onChangePage={onChangePage}/>
