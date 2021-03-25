@@ -1,6 +1,7 @@
 import {Dispatch} from 'redux'
 import {API, APIpack} from '../api/api'
 import {log} from 'util'
+import {change_statusAC} from './appReducer'
 
 export enum ACTIONS_TYPE {
     SET_CARDS = 'cardsReducer/SET_CARDS',
@@ -33,11 +34,16 @@ export const setPackUserId = (id: string) => ({type: ACTIONS_TYPE.SET_PACK_USER_
 // thunks
 
 export const getCardsTC = (packId: string) => (dispatch: Dispatch) => {
+    dispatch(change_statusAC('loading'))
     APIpack.getCards(packId).then(res => {
         dispatch(setCards(res.data.cards))
         dispatch(setPackUserId(res.data.packUserId))
+        dispatch(change_statusAC('success'))
     })
-        .catch(err => console.log(JSON.stringify(err)))
+        .catch(err => {
+            console.log(JSON.stringify(err))
+            dispatch(change_statusAC('failed'))
+       })
 }
 // types
 type ActionsType =

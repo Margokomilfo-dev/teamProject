@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {APIpack} from "../api/api";
+import {change_statusAC} from './appReducer'
 
 
 export enum ACTIONS_TYPE {
@@ -69,33 +70,42 @@ export const updateCardPackAC = (idCard: string, newName: string) => ({type: ACT
 
 //thunks get all cards
 export const getCardPacksTC = (pageNumber?: number, pageCount?: number, userID?: string) => (dispatch: Dispatch) => {
+    dispatch(change_statusAC('loading'))
     APIpack.getCardPacks(pageNumber).then(res => {
         dispatch(setCardPacksAC(res.cardPacks))
         dispatch(setCardPacksPageCountAC(res.pageCount))
         dispatch(setCardPacksTotalCountAC(res.cardPacksTotalCount))
+        dispatch(change_statusAC('success'))
     })
 }
 //thunk add new PacksCards
 export const addNewCardPackTC = () => (dispatch: Dispatch) => {
+    dispatch(change_statusAC('loading'))
     APIpack.addPack()
       .then(res => {
+          dispatch(change_statusAC('loading'))
           dispatch(addNewCardsPackAC(res.newCardsPack))
-          getCardPacksTC()
+          // getCardPacksTC()
+          dispatch(change_statusAC('success'))
       })
 }
 //thunk for delete Pack
 export const deleteCardPackTC = (idPack: string) => (dispatch: Dispatch) => {
     APIpack.deletePack(idPack)
       .then(res => {
+          dispatch(change_statusAC('loading'))
           dispatch( deleteCardPackAC(idPack))
-          getCardPacksTC()
+          // getCardPacksTC()
+          dispatch(change_statusAC('success'))
       })
 }
 //thunk for update Pack
 export const updateCardPackTC = (idPack: string, newName: string) => (dispatch: Dispatch) => {
     APIpack.updatePack(idPack)
       .then(res => {
+          dispatch(change_statusAC('loading'))
           dispatch(updateCardPackAC( idPack, newName))
+          dispatch(change_statusAC('success'))
       })
 }
 

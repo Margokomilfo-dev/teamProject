@@ -2,7 +2,7 @@ import  {AuthLoginType, API} from '../api/api'
 import {Dispatch} from 'redux'
 import {setProfileAC} from './profileReducer'
 import {setIsLogin} from "./authReducer";
-import {initializeAppTC, isInitializedAC} from './appReducer'
+import {change_statusAC, initializeAppTC, isInitializedAC} from './appReducer'
 
 export enum ACTIONS_TYPE {
     SET_IS_LOGIN = 'loginReducer/SET-IS-LOGGED-IN',
@@ -32,27 +32,34 @@ export const setIsErrorAC = (error: string) => ({type: ACTIONS_TYPE.SET_IS_ERROR
 
 //thunks
 export const loginTC = (data: AuthLoginType) => (dispatch: Dispatch) => {
+    dispatch(change_statusAC('loading'))
     API.login(data.email, data.password, data.rememberMe)
         .then(res => {
+
             dispatch(setIsLoggedInAC(true))
             dispatch(setIsLogin(true))
             dispatch(isInitializedAC(true))
             dispatch(setProfileAC(res))
             initializeAppTC()
+            dispatch(change_statusAC('success'))
 
         })
         .catch(err => {
+            dispatch(change_statusAC('failed'))
             dispatch(setIsErrorAC(err.error))
         })
 }
 export const logOutTC = () => (dispatch: Dispatch) => {
     API.logOut()
         .then(res => {
+            dispatch(change_statusAC('loading'))
             dispatch(setIsLoggedInAC(false))
             dispatch(setIsLogin(false))
             dispatch(isInitializedAC(false))
+            dispatch(change_statusAC('success'))
         })
         .catch(err => {
+            dispatch(change_statusAC('failed'))
             dispatch(setIsErrorAC(err.error))
         })
 }

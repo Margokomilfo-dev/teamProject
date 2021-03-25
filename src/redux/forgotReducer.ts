@@ -1,5 +1,6 @@
 import {PassRecType, API} from '../api/api'
 import {Dispatch} from 'redux'
+import {change_statusAC} from './appReducer'
 
 enum ACTION_TYPE {
 	SET_OK = 'forgotReducer/SET_OK',
@@ -39,16 +40,29 @@ export const setOkNewPassAC = (infoNewPass: string) => ({type: ACTION_TYPE.SET_O
 export const setErrorNewPass = (errorNewPass: string) => ({type: ACTION_TYPE.SET_ERROR_NEW_PASS, errorNewPass } as const)
 
 
-export const sendEmailPassRecTC = (data: PassRecType) => (dispatch: Dispatch<ActionType>) => {
+export const sendEmailPassRecTC = (data: PassRecType) => (dispatch: Dispatch) => {
 	API.passRec(data.email, data.from, data.message)
-		.then(response => { dispatch(setOkPassRecAC( response.info ))})
-		.catch(error => { dispatch(setErrorPassRec('Such email is not registered'))})
+		.then(response => {
+			dispatch(change_statusAC('loading'))
+			dispatch(setOkPassRecAC( response.info ))
+			dispatch(change_statusAC('success'))
+		})
+		.catch(error => {
+			dispatch(setErrorPassRec('Such email is not registered'))
+			dispatch(change_statusAC('failed'))
+		})
 }
 
-export const newPassTC = (password: string, resetPasswordToken: string) => (dispatch: Dispatch<ActionType>) => {
+export const newPassTC = (password: string, resetPasswordToken: string) => (dispatch: Dispatch) => {
 	API.newPass(password, resetPasswordToken)
-		.then(res => {dispatch(setOkNewPassAC('password change'))})
-		.catch(err => {dispatch(setErrorNewPass('error new password'))})
+		.then(res => {
+			dispatch(change_statusAC('loading'))
+			dispatch(setOkNewPassAC('password change'))
+			dispatch(change_statusAC('success'))
+		})
+		.catch(err => {
+			dispatch(change_statusAC('failed'))
+			dispatch(setErrorNewPass('error new password'))})
 }
 
 type ActionType = ReturnType<typeof setOkPassRecAC>

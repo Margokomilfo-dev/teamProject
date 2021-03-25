@@ -5,12 +5,14 @@ import {AppRootStateType} from '../../../redux/store'
 import {NavLink, Redirect} from 'react-router-dom'
 import {ProfileType} from '../../../redux/profileReducer'
 import {logOutTC} from '../../../redux/loginReducer'
+import {Loading} from '../../Loading/loading'
 
 export const Profile = () => {
     const dispatch = useDispatch()
-    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
     const profile = useSelector<AppRootStateType, ProfileType | null>(state => state.profile.profile)
-    const isLogin = useSelector<AppRootStateType,  boolean>(state=> state.auth.isLogin)
+    const status = useSelector<AppRootStateType, string>(state => state.app.status)
+    const isLoggedIn = useSelector<AppRootStateType, boolean>(state => state.login.isLoggedIn)
+
 
     if (!isLoggedIn) {
         return <Redirect to={'/login'}/>
@@ -18,6 +20,10 @@ export const Profile = () => {
     const logout = () => {
     	dispatch(logOutTC())
 	}
+
+    if (status==='loading'){
+        return <Loading/>
+    }
      return (
         <div className={s.profileOverlay}>
             {profile &&

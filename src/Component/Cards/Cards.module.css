@@ -1,6 +1,6 @@
 .cards {
     margin: 100px auto;
-    max-width: 1300px;
+    max-width: 900px;
 }
 .header {
     display: flex;
@@ -10,12 +10,15 @@
 
 }
 .mainInfo {
-    width: 80%;
+    width: 90%;
     display: flex;
     justify-content: space-between;
 }
 .mainInfo p {
     width: 50%;
+    font-size: 18px;
+    padding: 0;
+    margin: 0;
 }
 .answer {
     display: flex;
@@ -31,4 +34,31 @@
     background: #fff2e8;
     display: flex;
     justify-content: space-between;
+}
+.noCards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    font-size: 22px;
+    border: 1px solid #ff9c6e;
+}
+.popup {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0, 0,.3);
+    z-index: 100;
+}
+.addCard {
+    width: 300px;
+    height: 300px;
+    background-color: #fff;
+    margin: 130px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

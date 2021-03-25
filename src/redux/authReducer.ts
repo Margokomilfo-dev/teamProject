@@ -1,5 +1,6 @@
 import  { RegistrationPostDataType, API} from "../api/api"
 import {Dispatch} from 'redux'
+import {change_statusAC} from './appReducer'
 
 
 export enum ACTIONS_TYPE {
@@ -37,9 +38,11 @@ export const setError = (error: string) => ({type: ACTIONS_TYPE.SET_ERROR, error
 export const setRegistration = (data: RegistrationPostDataType) => (dispatch: Dispatch) => {
     API.registration(data.email, data.password)
         .then(res => {
-            dispatch(setIsRegistered(true))})
+            dispatch(setIsRegistered(true))
+        })
         .catch(err => {
             dispatch(setError('Email already exists'))
+
         })
 
 }
