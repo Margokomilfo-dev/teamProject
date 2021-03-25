@@ -73,7 +73,7 @@ export const APIpack = {
     getCards: (packId: string) => {
         return instance.get(`cards/card?cardsPack_id=${packId}`)
             .then(res => {
-                return res.data
+                return res
             })
     }
 }
