@@ -13,24 +13,34 @@
 }
 
 .cardPacksWrapper {
-    padding: 0;
     margin: 10px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     list-style: none;
     background: #fff2e8;
+    padding: 0 10px;
+}
+.mainInfo {
+    width: 10%;
+    display: flex;
+    justify-content: space-between;
 }
 
-li button:first-of-type {
-    display: none;
-}
+/*li button:first-of-type {*/
+/*    display: none;*/
+/*}*/
 
 .card {
     padding: 10px;
-    /*width: 370px;*/
+    width: 20%;
 }
-
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 10%;
+}
 .buttonsWrapper {
     display: flex;
 }
